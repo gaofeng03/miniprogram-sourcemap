@@ -4,6 +4,8 @@ const rawSourceMap = require("./sourcemap/gh_f5cd32cf3467_453_0/onlinePages/app-
 
 // console.log(rawSourceMap)
 
+// https://github.com/mozilla/source-map#sourcemapconsumerprototypecomputecolumnspans
+
 window.sourceMap.SourceMapConsumer.initialize({
   "lib/mappings.wasm": "https://unpkg.com/source-map@0.7.3/lib/mappings.wasm"
 });
