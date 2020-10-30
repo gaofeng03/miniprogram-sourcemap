@@ -1,6 +1,24 @@
 import "./App.css";
 
-const rawSourceMap = require("./sourcemap/gh_f5cd32cf3467_453_0/onlinePages/app-service.map.json")
+import fs from 'fs'
+import path from "path"
+
+const _rawSourceMap = require("./sourcemap/gh_f5cd32cf3467_453_0/onlinePages/app-service.map.json")
+
+let rawSourceMap = []
+
+const baseDir = "./sourcemap/"
+const context = require.context("./sourcemap/", true, /\.json$/)
+
+context.keys().map(key => {
+  const file = "." + path.resolve(baseDir, key)
+  fs.readFile(file, (err, data) => {
+    console.log(data)
+    rawSourceMap.push(data)
+  })
+})
+
+console.log(rawSourceMap)
 
 // console.log(rawSourceMap)
 
@@ -20,7 +38,7 @@ window.sourceMap.SourceMapConsumer.initialize({
 //     "CAAC,IAAI,IAAM,SAAUA,GAClB,OAAOC,IAAID;CCDb,IAAI,IAAM,SAAUE,GAClB,OAAOA"
 // };
 
-window.sourceMap.SourceMapConsumer.with(rawSourceMap, null, consumer => {
+window.sourceMap.SourceMapConsumer.with(_rawSourceMap, null, consumer => {
     // console.log(consumer.sources);
     // [ 'http://example.com/www/js/one.js',
     //   'http://example.com/www/js/two.js' ]
