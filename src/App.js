@@ -1,6 +1,5 @@
 import "./App.css";
 
-import fs from 'fs'
 import path from "path"
 
 const _rawSourceMap = require("./sourcemap/gh_f5cd32cf3467_453_0/onlinePages/app-service.map.json")
@@ -12,10 +11,8 @@ const context = require.context("./sourcemap/", true, /\.json$/)
 
 context.keys().map(key => {
   const file = "." + path.resolve(baseDir, key)
-  fs.readFile(file, (err, data) => {
-    console.log(data)
-    rawSourceMap.push(data)
-  })
+  const data = require(path.resolve(file))
+  rawSourceMap.push(data)
 })
 
 console.log(rawSourceMap)
