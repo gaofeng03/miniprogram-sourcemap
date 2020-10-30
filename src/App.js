@@ -11,13 +11,11 @@ const context = require.context("./sourcemap/", true, /\.json$/)
 
 context.keys().map(key => {
   const file = "." + path.resolve(baseDir, key)
-  const data = require(path.resolve(file))
+  const data = require(`${file}`)
   rawSourceMap.push(data)
 })
 
 console.log(rawSourceMap)
-
-// console.log(rawSourceMap)
 
 // https://github.com/mozilla/source-map#sourcemapconsumerprototypecomputecolumnspans
 
