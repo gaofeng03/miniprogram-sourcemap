@@ -1,25 +1,20 @@
 import "./App.css";
+import React from "react";
+import path from "path";
+import { SourceMapConsumer, SourceNode } from "source-map";
 
-import path from "path"
+const baseDir = "./sourcemap/";
+const context = require.context("./sourcemap/", true, /\.json$/);
 
-const _rawSourceMap = require("./sourcemap/gh_f5cd32cf3467_453_0/onlinePages/app-service.map.json")
-
-let rawSourceMap = []
-
-const baseDir = "./sourcemap/"
-const context = require.context("./sourcemap/", true, /\.json$/)
-
-context.keys().map(key => {
-  const file = "." + path.resolve(baseDir, key)
+let rawSourceMap = context.keys().map(key => {
+  const file = "." + path.resolve(baseDir, key);
   const data = require(`${file}`)
-  rawSourceMap.push(data)
-})
-
-console.log(rawSourceMap)
+  return data;
+});
 
 // https://github.com/mozilla/source-map#sourcemapconsumerprototypecomputecolumnspans
 
-window.sourceMap.SourceMapConsumer.initialize({
+SourceMapConsumer.initialize({
   "lib/mappings.wasm": "https://unpkg.com/source-map@0.7.3/lib/mappings.wasm"
 });
 
@@ -33,18 +28,26 @@ window.sourceMap.SourceMapConsumer.initialize({
 //     "CAAC,IAAI,IAAM,SAAUA,GAClB,OAAOC,IAAID;CCDb,IAAI,IAAM,SAAUE,GAClB,OAAOA"
 // };
 
-window.sourceMap.SourceMapConsumer.with(_rawSourceMap, null, consumer => {
+rawSourceMap.map(x => {
+  
+  SourceMapConsumer.with(x, null, consumer => {
     // console.log(consumer.sources);
     // [ 'http://example.com/www/js/one.js',
     //   'http://example.com/www/js/two.js' ]
 
     // 返回提供的生成的源行和列位置的原始源，行和列信息。唯一的参数是具有以下属性的对象：
-    console.log(
-      consumer.originalPositionFor({
-        line: 10515,
-        column: 15480
-      })
-    );
+
+    const line_column = "10609:7942".split(":")
+
+    const source = consumer.originalPositionFor({
+      line: ~~line_column[0],
+      column: ~~line_column[1]
+    })
+
+    if(source.source) {
+      console.log(source)
+    }
+
 
     // { source: 'http://example.com/www/js/two.js',
     //   line: 2,
@@ -63,10 +66,40 @@ window.sourceMap.SourceMapConsumer.with(_rawSourceMap, null, consumer => {
 
     // 遍历此源映射中原始源/行/列与生成的行/列之间的每个映射。
     consumer.eachMapping(function(m) {
-      // ...
+      
     });
-  }
-);
+
+  });
+
+})
+
+
+
+// function compile(ast) {
+//   switch (ast.type) {
+//   case 'BinaryExpression':
+//     return new SourceNode(
+//       ast.location.line,
+//       ast.location.column,
+//       ast.location.source,
+//       [compile(ast.left), " + ", compile(ast.right)]
+//     );
+//   case 'Literal':
+//     return new SourceNode(
+//       ast.location.line,
+//       ast.location.column,
+//       ast.location.source,
+//       String(ast.value)
+//     );
+//   default:
+//     throw new Error("Bad AST");
+//   }
+// }
+ 
+// var ast = parse("40 + 2", "add.js");
+// console.log(compile(ast).toStringWithSourceMap({
+//   file: 'add.js'
+// }));
 
 function App() {
   return <div className="App"></div>;
