@@ -12,6 +12,8 @@ let rawSourceMap = context.keys().map(key => {
   return data;
 });
 
+console.log(rawSourceMap)
+
 // https://github.com/mozilla/source-map#sourcemapconsumerprototypecomputecolumnspans
 
 SourceMapConsumer.initialize({
