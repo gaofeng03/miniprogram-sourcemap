@@ -2,7 +2,7 @@
   "name": "miniprogram-sourcemap",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://assets.monogogo.cn/static/miniprogram-sourcemap/index.html",
+  "homepage": "http://sourcemap.monogogo.cn/",
   "dependencies": {
     "@babel/core": "7.12.3",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.2",
