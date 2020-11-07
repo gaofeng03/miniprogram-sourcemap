@@ -43,7 +43,8 @@
 .App-right {
   width: 75%;
   height: 100vh;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   background: #23241f;
 }
 

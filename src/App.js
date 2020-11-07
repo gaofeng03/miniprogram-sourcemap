@@ -263,7 +263,7 @@ class App extends React.Component {
               <input
                 ref={this.inputRef}
                 type="text"
-                placeholder="10609:7942"
+                placeholder="例 10609:7942"
                 onChange={this.onInput}
               />
             </li>

@@ -1,70 +1,24 @@
-# Getting Started with Create React App
+# sourceMap 解析
+> [https://github.com/mozilla/source-map](https://github.com/mozilla/source-maphttp://) 可以用于生成和解析 `sourceMap` 文件的库
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 获取微信小程序 sourcemap 文件
+![2020-11-08@04:15:54wei-xin-jie-tu-_20201108041558](https://images.monogogo.cn/2020-11-08@04:15:54wei-xin-jie-tu-_20201108041558.png?imageMogr2/auto-orient/thumbnail/700x/blur/1x0/quality/100|imageslim)
 
-## Available Scripts
+### 导入sourcemap文件
+- 选择文解压后的文件夹（导入全部）
 
-In the project directory, you can run:
+![2020-11-08@04:20:03wei-xin-jie-tu-_20201108041958](https://images.monogogo.cn/2020-11-08@04:20:03wei-xin-jie-tu-_20201108041958.png?imageMogr2/auto-orient/thumbnail/700x/blur/1x0/quality/100|imageslim)
+- 导入成功
 
-### `yarn start`
+![2020-11-08@04:17:43wei-xin-jie-tu-_20201108041757](https://images.monogogo.cn/2020-11-08@04:17:43wei-xin-jie-tu-_20201108041757.png?imageMogr2/auto-orient/thumbnail/700x/blur/1x0/quality/100|imageslim)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 获取错误信息行/列号
+> 可以通过微信后台获取
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![2020-11-08@04:21:31wei-xin-jie-tu-_20201108042147](https://images.monogogo.cn/2020-11-08@04:21:31wei-xin-jie-tu-_20201108042147.png?imageMogr2/auto-orient/thumbnail/700x/blur/1x0/quality/100|imageslim)
 
-### `yarn test`
+### 提交获取错误信息
+![2020-11-08@04:25:14wei-xin-jie-tu-_20201108042518](https://images.monogogo.cn/2020-11-08@04:25:14wei-xin-jie-tu-_20201108042518.png?imageMogr2/auto-orient/thumbnail/700x/blur/1x0/quality/100|imageslim)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# 项目地址
+[https://sourcemap.monogogo.cn](https://sourcemap.monogogo.cn)
