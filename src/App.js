@@ -232,7 +232,6 @@ class App extends React.Component {
     if(!this.state.lineAndColumn) return
 
     await this.init();
-    
     this.setState({lineAndColumn: ""})
   };
 
