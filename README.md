@@ -1,4 +1,4 @@
-# sourceMap 解析
+# 获取微信小程序 sourceMap 解析
 > [https://github.com/mozilla/source-map](https://github.com/mozilla/source-maphttp://) 可以用于生成和解析 `sourceMap` 文件的库
 
 ### 获取微信小程序 sourcemap 文件
