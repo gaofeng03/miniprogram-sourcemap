@@ -3,8 +3,19 @@ import React from "react";
 // import path from "path";
 import classNames from "classnames";
 import { SourceMapConsumer, SourceNode } from "source-map";
-import { Button, Layout, Space, message, Input, Result } from "antd";
+import {
+  Button,
+  Layout,
+  Form,
+  message,
+  Input,
+  Result,
+  Card,
+  Typography,
+} from "antd";
 import { AlignLeftOutlined } from "@ant-design/icons";
+
+const { Text, Link } = Typography;
 
 // const { Sider, Content } = Layout;
 // const baseDir = "./sourcemap/";
@@ -18,15 +29,18 @@ class App extends React.Component {
       files: [],
       sourceContents: [],
       rawSourceMap: [],
-      lineAndColumn: "10609:7942",
+      // lineAndColumn: "10609:7942",
     };
   }
 
   inputRef = React.createRef();
   fileRef = React.createRef();
+  formRef = React.createRef();
+  lineAndColumn = "10609:7942";
 
   componentDidMount() {
     // this.init();
+    this.highlightCallBack();
   }
 
   componentDidUpdate() {
@@ -51,10 +65,10 @@ class App extends React.Component {
     // });
 
     const key = "SourceMapConsumer";
+    const { rawSourceMap } = this.state;
+    const lineAndColumn = this.lineAndColumn;
 
     message.loading({ content: "Loading...", key });
-
-    const { rawSourceMap, lineAndColumn } = this.state;
 
     console.log("rawSourceMap", rawSourceMap);
 
@@ -224,26 +238,32 @@ class App extends React.Component {
   };
 
   onInput = (e) => {
-    this.setState({ lineAndColumn: e.target.value });
+    this.lineAndColumn = e.target.value;
   };
 
   onSubmit = async () => {
-    const { rawSourceMap, lineAndColumn } = this.state;
+    const { rawSourceMap } = this.state;
 
     if (rawSourceMap.length === 0) {
       message.error("rawSourceMap 不存在");
       return;
     }
 
-    if (lineAndColumn.split(":").length < 2) {
+    if (this.lineAndColumn.split(":").length < 2) {
       message.error("请输入 line:column");
+      this.inputRef.current.value = "";
       return;
     }
 
     await this.init();
 
+    this.onReset();
+  };
+
+  onReset = () => {
+    this.lineAndColumn = "";
     this.inputRef.current.value = "";
-    this.setState({ lineAndColumn: "" });
+    this.formRef.current.resetFields();
   };
 
   render() {
@@ -252,48 +272,73 @@ class App extends React.Component {
     return (
       <div className={classNames("App")}>
         <div className="App-left">
-          <ul>
-            <li>
-              sourcemap&#12288;&nbsp;
-              <Input
-                ref={this.fileRef}
-                type="file"
-                webkitdirectory="true"
-                onChange={this.onFile}
-              />
+          <Card>
+            <Form
+              name="control-hooks"
+              onFinish={this.onSubmit}
+              ref={this.formRef}
+            >
+              <Form.Item
+                name="sourceMap"
+                label="sourceMap"
+                rules={[{ required: true }]}
+              >
+                <Input
+                  ref={this.fileRef}
+                  type="file"
+                  webkitdirectory="true"
+                  onChange={this.onFile}
+                />
+              </Form.Item>
               {directory.length > 0 && (
-                <ul style={{ margin: 0, border: "none" }}>
-                  {directory.map((dir, key) => {
-                    return <li key={key}>{dir}</li>;
-                  })}
-                </ul>
+                <Form.Item style={{ marginTop: "-20px" }}>
+                  <ul style={{ border: "none" }}>
+                    {directory.map((dir, key) => {
+                      return (
+                        <li key={key}>
+                          <Text code>{dir}</Text>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </Form.Item>
               )}
-            </li>
-            <li>
-              line:column&#12288;
-              <Input
-                ref={this.inputRef}
-                type="text"
-                placeholder="例 10609:7942"
-                onChange={this.onInput}
-              />
-            </li>
-            <li>
-              <Button type="primary" onClick={this.onSubmit}>
-                submit
-              </Button>
-            </li>
-          </ul>
+              <Form.Item
+                name="line:column"
+                label="line:column"
+                rules={[{ required: true }]}
+              >
+                <Input
+                  ref={this.inputRef}
+                  type="text"
+                  placeholder="例 10609:7942"
+                  onChange={this.onInput}
+                />
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  style={{ marginRight: "10px" }}
+                >
+                  Submit
+                </Button>
+                <Button htmlType="button" onClick={this.onReset}>
+                  Reset
+                </Button>
+              </Form.Item>
+            </Form>
+          </Card>
           {sources.map((source = {}, key) => {
             return (
-              <ul key={key}>
-                <a href={`#pos-${source.key}`}>
+              <Card key={key}>
+                <Link href={`#pos-${source.key}`}>
                   <li>source: {source.source}</li>
                   <li>line: {source.line}</li>
                   <li>column: {source.column}</li>
                   <li>name: {source.name}</li>
-                </a>
-              </ul>
+                </Link>
+              </Card>
             );
           })}
         </div>
@@ -311,7 +356,7 @@ class App extends React.Component {
             <Result
               status={"info"}
               icon={<AlignLeftOutlined style={{ color: "rgb(55 55 55)" }} />}
-              title="没有数据！"
+              title="没有数据"
             />
           )}
         </div>

@@ -33,13 +33,14 @@
 
 .App-left ul {
   padding: 0;
-  margin: 15px 0 15px 20px;
+  margin: 0 0 0 10px;
   border-bottom: 1px solid #ddd;
   list-style: none;
+  color: #333;;
 }
 
 .App-left ul li {
-  margin: 10px 0;
+  margin: 0;
 }
 .App-left ul ul {
   margin: 10px;
@@ -65,16 +66,18 @@
   width: calc(100% - 350px);
   height: 100vh;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto;
   background: #23241f;
 }
 
 .App-right code {
   width: 100%;
+  overflow-x: initial;
 }
 
 .App-right .ant-result-title {
   color: rgb(55, 55, 55);
+  font-size: 20px;
 }
 
 .hightlight,
