@@ -1,3 +1,5 @@
+@import "~antd/dist/antd.css";
+
 .App {
   display: flex;
 }
@@ -24,15 +26,31 @@
 }
 
 .App-left {
-  width: 25%;
+  width: 350px;
   height: 100vh;
   overflow: auto;
 }
 
 .App-left ul {
-  margin: 0 16px;
+  padding: 0;
+  margin: 15px 0 15px 20px;
   border-bottom: 1px solid #ddd;
-  padding: 16px 20px;
+  list-style: none;
+}
+
+.App-left ul li {
+  margin: 10px 0;
+}
+.App-left ul ul {
+  margin: 10px;
+}
+.App-left ul ul li {
+  margin: 0 0 0 20px;
+  list-style-type: square;
+}
+
+.App-left ul li input {
+  width: 200px;
 }
 
 .App-left ul a {
@@ -41,7 +59,10 @@
 }
 
 .App-right {
-  width: 75%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100% - 350px);
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
@@ -52,9 +73,14 @@
   width: 100%;
 }
 
-.hightlight, .hightlight * {
-  color: red!important;
-  background: yellow!important;
+.App-right .ant-result-title {
+  color: rgb(55, 55, 55);
+}
+
+.hightlight,
+.hightlight * {
+  color: red !important;
+  background: yellow !important;
   text-decoration: underline;
 }
 
@@ -66,3 +92,4 @@
     transform: rotate(360deg);
   }
 }
+

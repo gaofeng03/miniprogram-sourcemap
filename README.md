@@ -21,4 +21,4 @@
 ![2020-11-08@04:25:14wei-xin-jie-tu-_20201108042518](https://images.monogogo.cn/2020-11-08@04:25:14wei-xin-jie-tu-_20201108042518.png?imageMogr2/auto-orient/thumbnail/700x/blur/1x0/quality/100|imageslim)
 
 # 项目地址
-[https://assets.monogogo.cn/static/miniprogram-sourcemap/index.html](https://assets.monogogo.cn/static/miniprogram-sourcemap/index.html)
+[http://sourcemap.monogogo.cn/](http://sourcemap.monogogo.cn/)

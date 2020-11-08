@@ -3,7 +3,10 @@ import React from "react";
 // import path from "path";
 import classNames from "classnames";
 import { SourceMapConsumer, SourceNode } from "source-map";
+import { Button, Layout, Space, message, Input, Result } from "antd";
+import { AlignLeftOutlined } from "@ant-design/icons";
 
+// const { Sider, Content } = Layout;
 // const baseDir = "./sourcemap/";
 // const context = require.context("./sourcemap/", true, /\.json$/);
 
@@ -47,17 +50,11 @@ class App extends React.Component {
     //   return data;
     // });
 
+    const key = "SourceMapConsumer";
+
+    message.loading({ content: "Loading...", key });
+
     const { rawSourceMap, lineAndColumn } = this.state;
-
-    if (rawSourceMap.length === 0) {
-      console.error("rawSourceMap 不存在");
-      return;
-    }
-
-    if (lineAndColumn.split(":").length < 2) {
-      console.error("line|column undefined");
-      return;
-    }
 
     console.log("rawSourceMap", rawSourceMap);
 
@@ -163,7 +160,9 @@ class App extends React.Component {
           return !x.source;
         })
       ) {
-        alert("没有找到错误！");
+        message.warn("没有找到错误！");
+      } else {
+        message.success({ content: "Loaded!", key, duration: 2 });
       }
     });
 
@@ -204,7 +203,7 @@ class App extends React.Component {
     });
   };
 
-  onFile = async(e) => {
+  onFile = async (e) => {
     const { target: { files = [] } = { files: [] } } = e;
     let rawSourceMap = [],
       directory = [],
@@ -222,17 +221,29 @@ class App extends React.Component {
     if (directory.length === 0) return;
 
     this.setState({ rawSourceMap, directory });
-  }
+  };
 
   onInput = (e) => {
     this.setState({ lineAndColumn: e.target.value });
   };
 
-  onSubmit = async() => {
-    if(!this.state.lineAndColumn) return
+  onSubmit = async () => {
+    const { rawSourceMap, lineAndColumn } = this.state;
+
+    if (rawSourceMap.length === 0) {
+      message.error("rawSourceMap 不存在");
+      return;
+    }
+
+    if (lineAndColumn.split(":").length < 2) {
+      message.error("请输入 line:column");
+      return;
+    }
 
     await this.init();
-    this.setState({lineAndColumn: ""})
+
+    this.inputRef.current.value = "";
+    this.setState({ lineAndColumn: "" });
   };
 
   render() {
@@ -244,7 +255,7 @@ class App extends React.Component {
           <ul>
             <li>
               sourcemap&#12288;&nbsp;
-              <input
+              <Input
                 ref={this.fileRef}
                 type="file"
                 webkitdirectory="true"
@@ -260,7 +271,7 @@ class App extends React.Component {
             </li>
             <li>
               line:column&#12288;
-              <input
+              <Input
                 ref={this.inputRef}
                 type="text"
                 placeholder="例 10609:7942"
@@ -268,7 +279,9 @@ class App extends React.Component {
               />
             </li>
             <li>
-              <button onClick={this.onSubmit}>submit</button>
+              <Button type="primary" onClick={this.onSubmit}>
+                submit
+              </Button>
             </li>
           </ul>
           {sources.map((source = {}, key) => {
@@ -294,6 +307,13 @@ class App extends React.Component {
               ></code>
             );
           })}
+          {sourceContents.length === 0 && (
+            <Result
+              status={'info'}
+              icon={<AlignLeftOutlined style={{color: "rgb(55 55 55)"}} />}
+              title="没有数据！"
+            />
+          )}
         </div>
       </div>
     );
