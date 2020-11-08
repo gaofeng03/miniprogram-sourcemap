@@ -36,7 +36,7 @@
   margin: 0 0 0 10px;
   border-bottom: 1px solid #ddd;
   list-style: none;
-  color: #333;;
+  color: #333;
 }
 
 .App-left ul li {
@@ -60,9 +60,9 @@
 }
 
 .App-right {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
   width: calc(100% - 350px);
   height: 100vh;
   overflow-y: auto;
@@ -80,6 +80,14 @@
   font-size: 20px;
 }
 
+.App-right .ant-result-info {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .hightlight,
 .hightlight * {
   color: red !important;
@@ -95,4 +103,3 @@
     transform: rotate(360deg);
   }
 }
-

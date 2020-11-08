@@ -18,7 +18,7 @@ const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 const publicUrlOrPath = getPublicUrlOrPath(
   process.env.NODE_ENV === 'development',
   require(resolveApp('package.json')).homepage,
-  process.env.PUBLIC_URL || "https://assets.monogogo.cn/static/miniprogram-sourcemap_v1.5/"
+  process.env.PUBLIC_URL || "https://assets.monogogo.cn/static/miniprogram-sourcemap_v1.6/"
 );
 
 const moduleFileExtensions = [
