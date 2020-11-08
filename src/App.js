@@ -309,8 +309,8 @@ class App extends React.Component {
           })}
           {sourceContents.length === 0 && (
             <Result
-              status={'info'}
-              icon={<AlignLeftOutlined style={{color: "rgb(55 55 55)"}} />}
+              status={"info"}
+              icon={<AlignLeftOutlined style={{ color: "rgb(55 55 55)" }} />}
               title="没有数据！"
             />
           )}
