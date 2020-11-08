@@ -263,7 +263,7 @@ class App extends React.Component {
   onReset = () => {
     this.lineAndColumn = "";
     this.inputRef.current.value = "";
-    this.formRef.current.resetFields();
+    this.formRef.current.resetFields(['line:column']);
   };
 
   render() {
@@ -355,7 +355,7 @@ class App extends React.Component {
           {sourceContents.length === 0 && (
             <Result
               status={"info"}
-              icon={<AlignLeftOutlined style={{ color: "rgb(55 55 55)" }} />}
+              icon={<AlignLeftOutlined style={{ color: "rgb(55,55,55)" }} />}
               title="没有数据"
             />
           )}
