@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { Fragment } from "react";
 // import path from "path";
 import classNames from "classnames";
 import { SourceMapConsumer, SourceNode } from "source-map";
@@ -11,9 +11,10 @@ import {
   Input,
   Result,
   Card,
+  Upload,
   Typography,
 } from "antd";
-import { AlignLeftOutlined } from "@ant-design/icons";
+import { AlignLeftOutlined, UploadOutlined } from "@ant-design/icons";
 
 const { Text, Link } = Typography;
 
@@ -174,6 +175,7 @@ class App extends React.Component {
           return !x.source;
         })
       ) {
+        message.destroy(key);
         message.warn("没有找到错误！");
       } else {
         message.success({ content: "Loaded!", key, duration: 2 });
@@ -263,7 +265,7 @@ class App extends React.Component {
   onReset = () => {
     this.lineAndColumn = "";
     this.inputRef.current.value = "";
-    this.formRef.current.resetFields(['line:column']);
+    this.formRef.current.resetFields(["line:column"]);
   };
 
   render() {
@@ -279,19 +281,41 @@ class App extends React.Component {
               ref={this.formRef}
             >
               <Form.Item
-                name="sourceMap"
                 label="sourceMap"
+                name="sourceMap"
                 rules={[{ required: true }]}
               >
-                <Input
-                  ref={this.fileRef}
-                  type="file"
-                  webkitdirectory="true"
-                  onChange={this.onFile}
-                />
+                <Fragment>
+                  <Form.Item
+                    name="sourceMap"
+                    rules={[{ required: false }]}
+                    style={{ marginBottom: 0 }}
+                  >
+                    <Input
+                      ref={this.fileRef}
+                      type="file"
+                      webkitdirectory="true"
+                      onChange={this.onFile}
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        zIndex: 9,
+                        opacity: 0,
+                        width: "121px",
+                        height: "38px",
+                      }}
+                    />
+                  </Form.Item>
+                  <Button
+                    icon={<UploadOutlined />}
+                    style={{ position: "absolute", top: "3px", left: "3px" }}
+                  >
+                    Select File
+                  </Button>
+                </Fragment>
               </Form.Item>
               {directory.length > 0 && (
-                <Form.Item style={{ marginTop: "-20px" }}>
+                <Form.Item style={{ marginTop: "-15px" }}>
                   <ul style={{ border: "none" }}>
                     {directory.map((dir, key) => {
                       return (
