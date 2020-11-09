@@ -294,6 +294,7 @@ class App extends React.Component {
                     <Input
                       ref={this.fileRef}
                       type="file"
+                      accept=".map"
                       webkitdirectory="true"
                       onChange={this.onFile}
                       style={{
