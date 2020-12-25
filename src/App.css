@@ -26,7 +26,7 @@
 }
 
 .App-left {
-  width: 350px;
+  width: 300px;
   height: 100vh;
   overflow: auto;
 }
@@ -60,14 +60,23 @@
 }
 
 .App-right {
-  /* display: flex; */
+  display: flex;
+  flex-direction: row;
   /* justify-content: center; */
   /* align-items: center; */
-  width: calc(100% - 350px);
+  width: calc(100% - 300px);
   height: 100vh;
   overflow-y: auto;
   overflow-x: auto;
   background: #23241f;
+}
+
+.App-right .source {
+  flex: 1;
+}
+
+.App-right .source:first-child {
+  border-right: 1px solid #333;
 }
 
 .App-right code {
@@ -77,7 +86,7 @@
 
 .App-right .ant-result-title {
   color: rgb(55, 55, 55);
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .App-right .ant-result-info {

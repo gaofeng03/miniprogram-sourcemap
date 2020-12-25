@@ -381,28 +381,54 @@ class App extends React.Component {
                     })}
                 </div>
                 <div className="App-right">
-                    {sourceContents.map((sourceContent = '', key) => {
-                        return (
-                            <code
-                                key={key}
-                                className="javascript"
-                                dangerouslySetInnerHTML={{
-                                    __html: sourceContent
-                                }}
-                            ></code>
-                        )
-                    })}
-                    {sourceContents.length === 0 && (
-                        <Result
-                            status={'info'}
-                            icon={
-                                <AlignLeftOutlined
-                                    style={{ color: 'rgb(55,55,55)' }}
-                                />
-                            }
-                            title="没有数据"
-                        />
-                    )}
+                    <div className="source">
+                        {sourceContents.map((sourceContent = '', key) => {
+                            return (
+                                <code
+                                    key={key}
+                                    className="javascript"
+                                    dangerouslySetInnerHTML={{
+                                        __html: sourceContent
+                                    }}
+                                ></code>
+                            )
+                        })}
+                        {sourceContents.length === 0 && (
+                            <Result
+                                status={'info'}
+                                icon={
+                                    <AlignLeftOutlined
+                                        style={{ color: 'rgb(55,55,55)', fontSize: '48px' }}
+                                    />
+                                }
+                                title="没有数据"
+                            />
+                        )}
+                    </div>
+                    <div className="source">
+                        {sourceContents.map((sourceContent = '', key) => {
+                            return (
+                                <code
+                                    key={key}
+                                    className="javascript"
+                                    dangerouslySetInnerHTML={{
+                                        __html: sourceContent
+                                    }}
+                                ></code>
+                            )
+                        })}
+                        {sourceContents.length === 0 && (
+                            <Result
+                                status={'info'}
+                                icon={
+                                    <AlignLeftOutlined
+                                        style={{ color: 'rgb(55,55,55)', fontSize: '48px' }}
+                                    />
+                                }
+                                title="没有数据"
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
         )
